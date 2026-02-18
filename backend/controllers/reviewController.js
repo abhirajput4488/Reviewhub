@@ -66,3 +66,17 @@ export const updateReviewStatus = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+export const getPendingReviews = async (req, res) => {
+  try {
+    const reviews = await Review.find({ status: "pending" })
+      .populate("user", "name")
+      .populate("business", "name");
+
+    res.json(reviews);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
