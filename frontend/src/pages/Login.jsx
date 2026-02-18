@@ -16,7 +16,7 @@ const Login = () => {
         { email, password }
       );
 
-      // 🔥 FIX: backend me user separate object nahi hai
+      // FIX: backend me user separate object nahi hai
       localStorage.setItem("token", data.token);
       localStorage.setItem(
         "user",
@@ -28,7 +28,6 @@ const Login = () => {
         })
       );
 
-      alert("Login Successful");
       navigate("/");
     } catch (error) {
       alert(error.response?.data?.message || "Login Failed");
