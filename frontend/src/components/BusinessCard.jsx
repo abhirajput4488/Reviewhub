@@ -3,14 +3,22 @@ import { Link } from "react-router-dom";
 
 const BusinessCard = ({ business }) => {
   return (
-    <div className="border rounded-lg p-4 shadow hover:shadow-md transition">
-      <h2 className="text-lg font-semibold">{business.name}</h2>
-      <p className="text-gray-600">{business.category}</p>
-      <p className="text-gray-500">{business.location}</p>
+    <div className="bg-white border rounded-xl p-5 shadow hover:shadow-lg transition duration-300">
+      <h2 className="text-xl font-semibold text-gray-800">
+        {business.name}
+      </h2>
+
+      <p className="text-sm text-gray-500 mt-1">
+        {business.category} • {business.location}
+      </p>
+
+      <p className="text-yellow-500 font-medium mt-2">
+        ⭐ {business.avgRating ? Number(business.avgRating).toFixed(1) : "0.0"}
+      </p>
 
       <Link
         to={`/business/${business._id}`}
-        className="inline-block mt-3 text-blue-600 font-medium hover:underline"
+        className="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition"
       >
         View Details →
       </Link>

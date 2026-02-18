@@ -1,5 +1,12 @@
 import React from "react";
-const SearchFilter = ({ search, setSearch, category, setCategory }) => {
+
+const SearchFilter = ({
+  search,
+  setSearch,
+  category,
+  setCategory,
+  categories = [],
+}) => {
   return (
     <div className="flex flex-col md:flex-row gap-4 mb-6">
       <input
@@ -16,9 +23,11 @@ const SearchFilter = ({ search, setSearch, category, setCategory }) => {
         className="border p-2 rounded w-full md:w-60"
       >
         <option value="">All Categories</option>
-        <option value="Restaurant">Restaurant</option>
-        <option value="Shop">Shop</option>
-        <option value="Service">Service</option>
+        {categories.map((cat, i) => (
+          <option key={i} value={cat}>
+            {cat}
+          </option>
+        ))}
       </select>
     </div>
   );

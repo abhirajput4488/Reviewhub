@@ -1,11 +1,20 @@
 import React from "react";
+
 const ReviewCard = ({ review }) => {
   return (
-    <div className="border rounded-md p-3 mb-3 bg-gray-50">
-      <div className="flex justify-between mb-1">
-        <span className="font-semibold">Rating: {review.rating} ⭐</span>
+    <div className="border rounded-xl p-4 bg-white shadow-sm hover:shadow-md transition">
+      <div className="flex justify-between items-center mb-2">
+        <span className="font-semibold text-gray-800">
+          {review.user?.name || "Anonymous"}
+        </span>
+        <span className="text-yellow-500 font-medium">
+          ⭐ {review.rating}
+        </span>
       </div>
-      <p className="text-gray-700">{review.comment}</p>
+
+      <p className="text-gray-700 text-sm leading-relaxed">
+        {review.comment}
+      </p>
     </div>
   );
 };

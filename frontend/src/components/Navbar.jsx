@@ -1,18 +1,55 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  return (
-    <nav className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-        <h1 className="text-2xl font-bold tracking-wide">ReviewHub</h1>
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user") || "null");
 
-        <div className="space-x-6 font-medium">
-          <Link to="/" className="hover:text-gray-200">Home</Link>
-          <Link to="/login" className="hover:text-gray-200">Login</Link>
-          <Link to="/register" className="hover:text-gray-200">Register</Link>
-          <Link to="/admin" className="hover:text-gray-200">Admin</Link>
-        </div>
+  const logoutHandler = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
+  return (
+    <nav className="bg-gray-900 text-white px-6 py-3 flex justify-between items-center shadow">
+      <Link to="/" className="font-bold text-xl tracking-wide">
+        ReviewHub
+      </Link>
+
+      <div className="flex items-center gap-4">
+        {user ? (
+          <>
+            <span className="text-sm">
+              Welcome, <span className="font-semibold">{user.name}</span>
+            </span>
+
+            {user.role === "admin" && (
+              <Link
+                to="/admin"
+                className="bg-yellow-500 text-black px-3 py-1 rounded-md text-sm hover:bg-yellow-400 transition"
+              >
+                Admin
+              </Link>
+            )}
+
+            <button
+              onClick={logoutHandler}
+              className="bg-red-500 px-3 py-1 rounded-md text-sm hover:bg-red-600 transition"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="hover:text-gray-300">
+              Login
+            </Link>
+            <Link to="/register" className="hover:text-gray-300">
+              Register
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
